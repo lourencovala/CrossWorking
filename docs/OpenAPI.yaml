@@ -1,0 +1,786 @@
+openapi: 3.0.2
+info:
+  title: CrossWorking
+  description: This Application provides access to the CrossWorking project data.
+  version: 1.0.0
+paths:
+  /api/users:
+    post:
+      summary: Create new user.
+      responses:
+        201:
+          description: User created. Response should be a user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserOutputFull"
+      requestBody:
+        description: User data.
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInput"
+    get:
+      summary: Get list of users.
+      responses:
+        200:
+          description: Response body should be a list of users.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserListOutput"
+  /api/users/{userId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get the given user.
+      responses:
+        200:
+          description: Response body should a user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserOutputFull"
+    put:
+      summary: Edit user.
+      responses:
+        200:
+          description: User/Profile changed. Response body should be a user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserOutputFull"
+      requestBody:
+        description: User data.
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdate"
+    delete:
+      summary: Delete user.
+      responses:
+        204:
+          description: User deleted successfully.
+  /api/ideas:
+    get:
+      summary: Get list of ideas.
+      responses:
+        200:
+          description: Response body should be a list of ideas.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdeaListOutput"
+  /api/users/{userId}/ideas:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get list of ideas from user.
+      responses:
+        200:
+          description: Response body should be a list of ideas.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdeaListOutput"
+    post:
+      summary: Create idea.
+      responses:
+        201:
+          description: Idea created. Response should be an idea.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdeaOutputFull"
+      requestBody:
+        description: Idea info.
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdeaInput"
+  /api/ideas/{ideaId}:
+    parameters:
+      - name: ideaId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get idea.
+      responses:
+        200:
+          description: Response body should be an idea.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/IdeaOutputFull"
+    put:
+      summary: Edit an idea.
+      responses:
+        200:
+          description: Idea changed. Response body should be an idea.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdeaOutputFull"
+      requestBody:
+        description: Idea info.
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdeaUpdate"
+    delete:
+      summary: Delete idea.
+      responses:
+        204:
+          description: Idea deleted.
+  /api/ideas/{ideaId}/candidates:
+    parameters:
+      - name: ideaId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get list of candidates for idea.
+      responses:
+        200:
+          description: Response body should be a list of users.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CandidateListOutput"
+  /api/ideas/{ideaId}/candidates/{candidateId}:
+    parameters:
+      - name: ideaId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: candidateId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get candidate for idea (called by owner).
+      responses:
+        200:
+          description: Response should be a candidature.
+      requestBody:
+        description: Candidature status. 
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CandidatureOutput"
+    put:
+      summary: Accept/Reject candidate.
+      responses:
+        200:
+          description: Change candidate status.
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CandidateOutput"
+      requestBody:
+        description: Choice. 
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CandidatureUpdate"
+  /api/users/{userId}/results:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get results for User's candidatures.
+      responses:
+        200:
+          description: List of results.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CandidatureResultListOutput"
+  /api/users/{userId}/candidatures:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Add candidate for idea.
+      responses:
+        201:
+          description: Candidate added.
+      requestBody:
+        description: Candidate info. 
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CandidatureInput"
+  /api/users/{userId}/candidatures/{ideaId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ideaId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get candidature to idea (called by candidate).
+      responses:
+        200:
+          description: Response should be candidature.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CandidatureOutput"
+    delete:
+      summary: Undo candidature.
+      responses:
+        204:
+          description: Candidature was undone.
+  /api/categories:
+    get:
+      summary: Get all skill categories.
+      responses:
+        200:
+          description: Response body should be a list of categories.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryListOutput"
+  /api/users/{userId}/skills:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Add skill to user.
+      responses:
+        201:
+          description: Skill added to user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillOutput"
+      requestBody:
+        description: Skill info. 
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SkillInput"
+    get:
+      summary: Get all skills from a user.
+      responses:
+        200:
+          description: Response body should be a list of skills.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillListOutput"
+  /api/users/{userId}/skills/{skillId}:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: skillId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get user skill.
+      responses:
+        200:
+          description: Response body should be a skill.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillOutput"
+    delete:
+      summary: Delete user skill.
+      responses:
+        204:
+          description: User skill deleted.
+  /api/ideas/{ideaId}/skills:
+    parameters:
+      - name: ideaId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      summary: Add skill to idea.
+      responses:
+        201:
+          description: Skill added to idea.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillOutput"
+      requestBody:
+        description: Skill info. 
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SkillInput"
+    get:
+      summary: Get all skills from an idea.
+      responses:
+        200:
+          description: Response body should be a list of skills.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillListOutput"
+  /api/ideas/{ideaId}/skills/{skillId}:
+    parameters:
+      - name: ideaId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: skillId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get idea skill.
+      responses:
+        200:
+          description: Response body should be a skill.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SkillOutput"
+    delete:
+      summary: Delete idea skill.
+      responses:
+        204:
+          description: Idea skill deleted.
+components:
+  schemas:
+    UserInput:
+      type: object
+      required:
+        - userId
+        - email
+      properties:
+        userId:
+          type: string
+          example: FEmLpMi4rNZYTAOLUGRzxeZfhyH2
+        email:
+          type: string
+          format: email
+          example: a@gmail.com
+    UserListOutput:
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserOutputShort"
+    UserOutputFull:
+      type: object
+      required:
+        - userId
+        - email
+        - profileImage
+        - skills
+      properties:
+        userId:
+          type: string
+          example: FEmLpMi4rNZYTAOLUGRzxeZfhyH2
+        name:
+          type: string
+          example: Name 1
+        email:
+          type: string
+          format: email
+          example: a@gmail.com
+        about:
+          type: string
+          example: This is my about section.
+        profileImage:
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1200px-NYCS-bull-trans-1.svg.png
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillOutput"
+    UserOutputShort:
+      type: object
+      required:
+        - userId
+        - email
+        - profileImage
+        - skills
+      properties:
+        userId:
+          type: string
+          example: FEmLpMi4rNZYTAOLUGRzxeZfhyH2
+        name:
+          type: string
+          example: Name 1
+        email:
+          type: string
+          format: email
+          example: a@gmail.com
+        profileImage:
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1200px-NYCS-bull-trans-1.svg.png
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillOutput"
+    UserOutputMini:
+      type: object
+      required:
+        - userId
+        - profileImage
+      properties:
+        userId:
+          type: string
+          example: FEmLpMi4rNZYTAOLUGRzxeZfhyH2
+        name:
+          type: string
+          example: Name 1
+        profileImage:
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1200px-NYCS-bull-trans-1.svg.png
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Name 1
+        about:
+          type: string
+          example: This is my about section.
+        profileImage:
+          type: string
+          example: https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1200px-NYCS-bull-trans-1.svg.png
+    IdeaInput:
+      type: object
+      required:
+        - title
+        - smallDescription
+        - description
+      properties:
+        title:
+          type: string
+          example: Idea 1
+        smallDescription:
+          type: string
+          example: Small text.
+        description:
+          type: string
+          example: Large Text.
+    IdeaListOutput:
+      type: object
+      required:
+        - ideas
+      properties:
+        ideas:
+          type: array
+          items:
+            $ref: "#/components/schemas/IdeaOutputShort"
+    IdeaOutputFull:
+      type: object
+      required:
+        - ideaId
+        - title
+        - smallDescription
+        - description
+        - user
+        - days
+        - skills
+      properties:
+        ideaId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+        title:
+          type: string
+          example: Idea 1
+        smallDescription:
+          type: string
+          example: Small text.
+        description:
+          type: string
+          example: Large text.
+        user:
+          $ref: "#/components/schemas/UserOutputMini"
+        days:
+          type: integer
+          example: 5
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillOutput"
+    IdeaOutputShort:
+      type: object
+      required:
+        - ideaId
+        - title
+        - smallDescription
+        - user
+        - days
+        - skills
+      properties:
+        ideaId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+        title:
+          type: string
+          example: Idea 1
+        smallDescription:
+          type: string
+          example: Small text.
+        user:
+          $ref: "#/components/schemas/UserOutputMini"
+        days:
+          type: integer
+          example: 5
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillOutput"
+    IdeaOutputMini:
+      type: object
+      required:
+        - ideaId
+        - title
+      properties:
+        ideaId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+        title:
+          type: string
+          example: Idea 1
+    IdeaUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Idea 1"
+        smallDescription:
+          type: string
+          example: Small text.
+        description:
+          type: string
+          example: Large text.
+    CategoryListOutput:
+      type: object
+      required:
+        - categories
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryOutput"
+    CategoryOutput:
+      type: object
+      required:
+        - categoryId
+        - name
+      properties:
+        categoryId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+        name:
+          type: string
+          example: Category 1
+    SkillInput:
+      type: object
+      required:
+        - name
+        - categoryId
+      properties:
+        name:
+          type: string
+          example: Skill 1
+        about:
+          type: string
+          example: Information about this skill.
+        categoryId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+    SkillListOutput:
+      type: object
+      required:
+        - skills
+      properties:
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillOutput"
+    SkillOutput:
+      type: object
+      required:
+        - skillId
+        - name
+        - categoryName
+      properties:
+        skillId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+        name:
+          type: string
+          example: Skill 1
+        about:
+          type: string
+          example: Information about this skill.
+        categoryName:
+          type: string
+          example: Technology
+    CandidatureInput:
+      type: object
+      required:
+        - ideaId
+      properties:
+        ideaId:
+          type: string
+          format: uuid
+          example: c5e36241-e105-4d6c-9884-da5105473c48
+    CandidatureOutput:
+      type: object
+      required:
+        - status
+        - daysSinceCreateDate
+        - daysSinceLastUpdate
+      properties:
+        status:
+          type: string
+          example: pending
+        daysSinceCreatedDate:
+          type: integer
+        daysSinceLastUpdate:
+          type: integer
+    CandidatureUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          example: accepted
+    CandidatureResultListOutput:
+      type: object
+      required:
+        - results
+      properties:
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/CandidatureResultOutput"
+    CandidatureResultOutput:
+      type: object
+      required:
+        - status
+        - daysSinceCreateDate
+        - daysSinceLastUpdate
+        - idea
+      properties:
+        status:
+          type: string
+          example: pending
+        daysSinceCreatedDate:
+          type: integer
+        daysSinceLastUpdate:
+          type: integer
+        idea:
+          $ref: "#components/schemas/IdeaOutputMini"
+    CandidateListOutput:
+      type: object
+      required:
+        - candidates
+      properties:
+        candidates:
+          type: array
+          items:
+            $ref: "#/components/schemas/CandidateOutput"
+    CandidateOutput:
+      type: object
+      required:
+        - user
+        - status
+        - daysSinceCreateDate
+        - daysSinceLastUpdate
+      properties:
+        user:
+          $ref: "#components/schemas/UserOutputShort"
+        status:
+          type: string
+          example: pending
+        daysSinceCreatedDate:
+          type: integer
+        daysSinceLastUpdate:
+          type: integer
+    ProblemJson:
+      type: object
+      required:
+        - type
+        - title
+        - detail
+        - status
+      properties:
+        type:
+          type: string
+          example: ""
+        title:
+          type: string
+          example: "Not found"
+        detail:
+          type: string
+          example: "The idea you are trying to find does not exist"
+        status:
+          type: integer
+          example: 404
