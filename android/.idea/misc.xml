@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/brand_background.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/brand_img.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/brand_logo.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/ic_baseline_cloud_off_24.xml" value="0.1335" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/logo_splash.xml" value="0.2" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/nav.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/drawable/splash_screen.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/mipmap-anydpi-v26/brand.xml" value="0.1925" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/mipmap-anydpi-v26/brand_round.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2985" />
+        <entry key="..\:/One Drive/OneDrive - Instituto Superior de Engenharia de Lisboa/6o Semestre/Projeto/CW/crossworking-project/code/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2985" />
+        <entry key="..\:/Semestre 6/PS/crossworking-project/code/android/app/src/main/res/xml/network_security_config.xml" value="0.17958459979736577" />
+      </map>
+    </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="dagger.Binds" />
+    </list>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

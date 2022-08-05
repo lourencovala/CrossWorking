@@ -1,0 +1,17 @@
+{
+  "resourceName": "s31e06a2a0",
+  "policyUUID": "1e06a2a0",
+  "bucketName": "crossworking37910d33abcc4ab391f7b532e57198ca",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE"
+}
