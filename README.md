@@ -39,3 +39,7 @@ The code is divided into 2 projects:
 ## Project Documents
 
 The project documents made public can be found in the [docs](docs) folder.
+
+## App Screenshots
+
+<img src="./register.jpeg" alt="register" width="200"/> <img src="./login.jpeg" alt="login" width="200"/> <img src="./feed.jpeg" alt="feed" width="200"/>
